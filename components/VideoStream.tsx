@@ -6,7 +6,7 @@ export default function VideoStream() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    const ws = new WebSocket("ws://localhost:8000/video_stream");
+    const ws = new WebSocket("ws://10.7.86.51:8005/video_stream");
     ws.binaryType = "arraybuffer";
 
     ws.onmessage = (event) => {

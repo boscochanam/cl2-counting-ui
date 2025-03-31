@@ -14,7 +14,7 @@ function formatLogMessage(log: any): string {
     return log + "\n";
   }
 
-  if (log.type === "ping") {
+  if (log.type === "ping" || log.type === "error") {
     // Return an empty string to ignore pings
     return "";
   }
@@ -33,7 +33,7 @@ export default function LogStream() {
   const logRef = useRef<HTMLPreElement>(null);
 
   useEffect(() => {
-    const ws = new WebSocket("ws://localhost:8000/log_stream");
+    const ws = new WebSocket("ws://10.7.86.51:8005/log_stream");
 
     ws.onmessage = (event) => {
       const log = logRef.current;
