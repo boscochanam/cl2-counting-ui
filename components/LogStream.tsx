@@ -33,8 +33,8 @@ export default function LogStream() {
   const logRef = useRef<HTMLPreElement>(null);
 
   useEffect(() => {
-    const ws = new WebSocket("ws://10.7.86.51:8005/log_stream");
-
+    // const ws = new WebSocket("ws://10.100.0.135:8005/log_stream");
+    const ws = new WebSocket("ws://localhost:8005/log_stream")
     ws.onmessage = (event) => {
       const log = logRef.current;
       if (log) {
@@ -59,18 +59,13 @@ export default function LogStream() {
   }, []);
 
   return (
-    <div className="flex flex-col h-full">
-      <h2 className="text-white font-mono" style={{ fontFamily: "monospace" }}>
-        Live Log Stream
-      </h2>
-      <ScrollArea className="h-full w-full rounded-md">
-        <div className="bg-[#252526] p-4 rounded-md w-full">
-          <pre
-            ref={logRef}
-            className="font-mono text-sm text-[#F8F8F2] whitespace-pre-wrap"
-          ></pre>
-        </div>
-      </ScrollArea>
+    <div className="flex flex-col h-[120px]">
+      <h2 className="text-sm font-medium text-white mb-2">System Logs</h2>
+      <div className="flex-1 overflow-auto rounded-md bg-[#1E1E1E] border border-[#2D2D2D]">
+        <pre ref={logRef} 
+          className="p-2 text-sm font-mono leading-relaxed text-gray-300"
+        ></pre>
+      </div>
     </div>
   );
 }
